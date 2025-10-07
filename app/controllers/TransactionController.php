@@ -62,7 +62,7 @@ class TransactionController extends Controller {
             }
         }
 
-        // Decide status: cashiers complete small transactions immediately; large amounts go pending. Customers always pending.
+        // cashiers complete small transactions immediately; large amounts go pending. Customers always pending.
         $status = 'completed';
         $approvalThreshold = 5000.0;
         if ($user['role'] === 'customer') {

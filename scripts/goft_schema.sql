@@ -1,7 +1,7 @@
 -- Creator: ghost1473
 -- SQL schema for Goft Bank (updated)
--- Creates full schema with required columns and constraints.
--- Import this into MySQL to initialize the database without runtime schema changes.
+-- Creates full schema with required columns 
+-- Import this into MySQL to initialize the database (Xammp)
 
 CREATE DATABASE IF NOT EXISTS goft;
 USE goft;

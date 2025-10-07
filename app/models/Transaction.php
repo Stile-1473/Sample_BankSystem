@@ -3,13 +3,13 @@
 
 class Transaction {
     private $db;
-    private $approvalThreshold = 5000.00; // Amounts >= threshold require manager approval (pending)
+    private $approvalThreshold = 5000.00; // Amounts >=  require manager approval (pending)
 
     public function __construct() {
         $this->db = (new Database())->getConnection();
     }
 
-    // Legacy create (kept for compatibility but not used by controller after upgrade)
+    
     public function create($account_id, $type, $amount) {
         $stmt = $this->db->prepare('INSERT INTO transactions (account_id, type, amount) VALUES (?, ?, ?)');
         return $stmt->execute([$account_id, $type, $amount]);
@@ -56,7 +56,7 @@ class Transaction {
                 $toId = isset($tx['to_account_id']) ? (int)$tx['to_account_id'] : 0;
                 $this->processTransfer((int)$tx['account_id'], $toId, (float)$tx['amount'], $tx);
             }
-            // After processing, mark main row completed (process* functions will update status)
+            
             return true;
         }
 
@@ -105,7 +105,7 @@ class Transaction {
         return (bool) $stmt->fetchColumn();
     }
 
-    // Processing helpers (atomic)
+    // Processing helpers 
     private function processDeposit(int $accountId, float $amount, ?array $existingTx = null) : array {
         $this->db->beginTransaction();
         try {

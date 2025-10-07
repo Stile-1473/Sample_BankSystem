@@ -42,7 +42,7 @@ class AccountController extends Controller {
     public function reject($id) {
         session_start();
         if (!isset($_SESSION['user']) || !in_array($_SESSION['user']['role'], ['admin','manager'])) $this->error403();
-        // Set account to closed (schema supports active, pending, closed)
+        // Set account to closed 
         $db = (new Database())->getConnection();
         $stmt = $db->prepare('UPDATE accounts SET status = "closed" WHERE id = ?');
         $stmt->execute([(int)$id]);
@@ -143,7 +143,7 @@ class AccountController extends Controller {
             require '../app/views/account/customerAccounts.php';
         }
 
-        // Cashier: process transactions form (generic)
+        // Cashier: process transactions form 
         public function process() {
             session_start();
             if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'cashier') $this->error403();

@@ -2,6 +2,13 @@
 // Creator: ghost1473
 
 class User {
+    private $db;
+
+//Gets Db connection
+    public function __construct() {
+        $this->db = (new Database())->getConnection();
+    }
+    //
     public function getPaginated($limit, $offset) {
         $stmt = $this->db->prepare('SELECT * FROM users WHERE status <> ? LIMIT ? OFFSET ?');
         $stmt->bindValue(1, 'deleted');
@@ -10,33 +17,35 @@ class User {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
+//Counts
     public function countAll() {
         $stmt = $this->db->prepare('SELECT COUNT(*) FROM users WHERE status <> ?');
         $stmt->execute(['deleted']);
         return $stmt->fetchColumn();
     }
+    //Changes user role
     public function changeRole($id, $role) {
         $stmt = $this->db->prepare('UPDATE users SET role = ? WHERE id = ?');
         return $stmt->execute([$role, $id]);
     }
-    private $db;
-    public function __construct() {
-        $this->db = (new Database())->getConnection();
-    }
+    
+    //Finds a specific user from db using username
     public function findByUsername($username) {
         $stmt = $this->db->prepare('SELECT * FROM users WHERE username = ?');
         $stmt->execute([$username]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+    //Creates user
     public function create($username, $password, $role, $email = null, $phone = null) {
         $stmt = $this->db->prepare('INSERT INTO users (username, password, role, email, phone) VALUES (?, ?, ?, ?, ?)');
         return $stmt->execute([$username, password_hash($password, PASSWORD_DEFAULT), $role, $email, $phone]);
     }
+    //Update userProfile
     public function updateProfile($id, $email, $phone) {
         $stmt = $this->db->prepare('UPDATE users SET email = ?, phone = ? WHERE id = ?');
         return $stmt->execute([$email, $phone, $id]);
     }
+    //Update user password
     public function updatePassword($id, $newPassword) {
         $stmt = $this->db->prepare('UPDATE users SET password = ? WHERE id = ?');
         return $stmt->execute([password_hash($newPassword, PASSWORD_DEFAULT), $id]);

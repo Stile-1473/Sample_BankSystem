@@ -1,9 +1,10 @@
 <?php
+//This code is for creating signature in  all the files
 // Usage (Windows CMD):
 //   cd c:\\xamppp\\htdocs\\Group && php scripts\\add_signature.php
 // If PHP is not in PATH, use full path, e.g.:
 //   cd c:\\xamppp\\htdocs\\Group && "C:\\xampp\\php\\php.exe" scripts\\add_signature.php
-// Optional flags: --dry-run (no writes), --verbose
+
 
 error_reporting(E_ALL);
 ini_set('display_errors', '1');

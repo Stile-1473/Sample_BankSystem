@@ -1,10 +1,9 @@
 <?php
 // Creator: ghost1473
-
 // Usage (Windows CMD):
 // cd c:\\xamppp\\htdocs\\Group && php scripts\\add_footer_signature.php --verbose
-// Adds a visible footer signature “Signature: Ghost1473 — ZeroDaySolutions” to all HTML/PHP view files.
-// It injects the signature inside an existing <footer>…</footer>, or creates one before </body> when missing.
+// Adds a visible footer signature “Signature: Ghost1473 — ZeroDaySolutions” to all HTML/PHP view files
+// It injects the signature inside an existing <footer>…</footer>, or creates one before </body> when missing
 
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
