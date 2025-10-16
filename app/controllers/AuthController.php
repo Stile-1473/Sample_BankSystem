@@ -1,7 +1,7 @@
 <?php
 // Creator: ghost1473
 
-session_start();
+//session_start();
 class AuthController extends Controller {
     public function login($error = null) {
         require_once '../app/views/auth/login.php';
@@ -27,6 +27,11 @@ class AuthController extends Controller {
             return;
         }
         $user = $userModel->findByUsername($username);
+        if ($user && $user['status'] === 'blocked') {
+            $error = 'Your account is blocked. Contact support.';
+            require '../app/views/auth/login.php';
+            return;
+        }
         if ($user && password_verify($password, $user['password'])) {
             $_SESSION['user'] = $user;
             $failedLoginModel->reset($username, $ip);

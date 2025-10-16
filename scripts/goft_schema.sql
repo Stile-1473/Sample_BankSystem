@@ -3,8 +3,8 @@
 -- Creates full schema with required columns 
 -- Import this into MySQL to initialize the database (Xammp)
 
-CREATE DATABASE IF NOT EXISTS goft;
-USE goft;
+CREATE DATABASE IF NOT EXISTS bms;
+USE bms;
 
 -- Disable FK checks during DROP phase to avoid dependency errors
 SET FOREIGN_KEY_CHECKS = 0;
